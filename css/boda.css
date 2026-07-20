@@ -4,8 +4,8 @@
 html[lang="es"] .en,
 html[lang="en"] .es { display: none !important; }
 
-.lang-switch a { font-weight: 600; letter-spacing: 1px; }
-.lang-switch a.active { color: #7A5C3E; border-bottom: 1px solid #7A5C3E; }
+.lang-switch a { font-weight: 600; letter-spacing: 1px; color: #9A8975; text-decoration: none; }
+.lang-switch a.active { color: #4A372A; }
 .lang-switch .sep { opacity: .4; margin: 0 4px; }
 
 /* --- palette: cream, brown, tropical green ------------------------------- */
@@ -181,12 +181,11 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 	font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
 }
 
-/* --- language toggle pinned to the corner -------------------------------- */
-/* .fh5co-nav is already position:absolute, so it anchors this */
-.menu-1 ul { padding-right: 100px; }
-.lang-switch { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); }
-@media screen and (max-width: 768px) {
-	/* narrow screens: let it sit in the flow rather than overlap the last link */
-	.menu-1 ul { padding-right: 0; }
-	.lang-switch { position: static; transform: none; }
+/* --- language toggle: fixed to the top right corner ---------------------- */
+/* lives outside the nav list entirely, so it can never crowd the links */
+.lang-switch {
+	position: fixed; top: 14px; right: 18px; z-index: 1100;
+	background: rgba(253, 249, 240, .92); border: 1px solid rgba(74, 55, 42, .15);
+	border-radius: 20px; padding: 5px 14px; font-size: 13px;
 }
+@media screen and (max-width: 768px) { .lang-switch { top: 10px; right: 10px; } }
