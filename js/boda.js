@@ -16,6 +16,11 @@
 		for (var j = 0; j < sw.length; j++) {
 			sw[j].className = sw[j].getAttribute('data-lang') === lang ? 'active' : '';
 		}
+		// alt text can't hold two languages the way visible spans can
+		var imgs = document.querySelectorAll('img[data-alt-es]');
+		for (var k = 0; k < imgs.length; k++) {
+			imgs[k].alt = imgs[k].getAttribute('data-alt-' + lang);
+		}
 	}
 
 	var stored = null;
@@ -49,5 +54,35 @@
 		});
 		tick();
 		setInterval(tick, 1000);
+		lightbox();
 	});
+
+	// ponytail: native <dialog> instead of a lightbox plugin — Esc and focus trapping come free.
+	function lightbox() {
+		var dlg = document.getElementById('lightbox');
+		if (!dlg || !dlg.showModal) return; // no <dialog>: links still open the full image
+		var img = dlg.querySelector('img');
+		var shots = [].slice.call(document.querySelectorAll('a[data-full]'));
+		var at = 0;
+
+		function show(i) {
+			at = (i + shots.length) % shots.length;
+			img.src = shots[at].getAttribute('data-full');
+			img.alt = shots[at].querySelector('img').alt;
+			dlg.querySelector('.lb-prev').hidden = dlg.querySelector('.lb-next').hidden = shots.length < 2;
+		}
+
+		shots.forEach(function (a, i) {
+			a.addEventListener('click', function (e) { e.preventDefault(); show(i); dlg.showModal(); });
+		});
+		dlg.querySelector('.lb-close').addEventListener('click', function () { dlg.close(); });
+		dlg.querySelector('.lb-prev').addEventListener('click', function () { show(at - 1); });
+		dlg.querySelector('.lb-next').addEventListener('click', function () { show(at + 1); });
+		dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); }); // click backdrop
+		document.addEventListener('keydown', function (e) {
+			if (!dlg.open) return;
+			if (e.key === 'ArrowRight') show(at + 1);
+			if (e.key === 'ArrowLeft') show(at - 1);
+		});
+	}
 })();
