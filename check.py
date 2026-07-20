@@ -34,7 +34,7 @@ shots = re.findall(r'data-full="([^"]+)"', html)
 assert len(shots) == len(re.findall(r'data-alt-es="', html)) == len(re.findall(r'data-alt-en="', html))
 assert all(re.findall(r'data-alt-es="([^"]+)"', html)), "empty alt text"
 thumbs = [f for f in os.listdir("images/gallery") if f.endswith("-t.jpg")]
-assert len(thumbs) == len([s for s in shots if "gallery/" in s]), "thumbnail/photo count mismatch"
+assert len(thumbs) == html.count("<figure>"), "thumbnail/photo count mismatch"  # banns uses <figure class=...>
 
 heavy = [p for p in shots if os.path.getsize(p) > 700_000]
 assert not heavy, f"images too heavy for mobile, re-encode: {heavy}"
