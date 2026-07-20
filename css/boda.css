@@ -162,9 +162,7 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
    heading sizes, and pairs with the Sacramento script used for the names */
 .fh5co-heading h2 {
 	font-family: "Cormorant Garamond", Georgia, serif;
-	/* 2.5x the previous size; the floor stays lower than 2.5x on purpose, or long
-	   titles like "CONFIRMÁ TU ASISTENCIA" overflow a phone screen */
-	font-size: clamp(56px, 11.5vw, 120px);
+	font-size: clamp(34px, 4.8vw, 52px);
 	font-weight: 400; letter-spacing: 2px; text-transform: uppercase;
 	color: #4A372A; line-height: 1.1; margin-bottom: 22px; overflow-wrap: break-word;
 }
@@ -176,9 +174,9 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 .venue-name { font-size: 24px; }
 .fh5co-heading { margin-bottom: 3em; }
 .fh5co-heading p { color: #6B5B4C; }
-/* template shrinks any <span> in a heading to a 13px uppercase kicker — that rule
-   was catching our .es/.en spans and mangling the intro paragraphs */
-.fh5co-heading p .es, .fh5co-heading p .en {
-	font-size: inherit; letter-spacing: normal; text-transform: none;
-	font-weight: inherit; color: inherit;
+/* template caps ANY <span> inside a heading at 13px grey uppercase. Our bilingual
+   .es/.en spans are spans, so every section title was stuck at 13px no matter what
+   font-size the h2 asked for. Make headings' spans transparent to their parent. */
+.fh5co-heading span {
+	font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
 }
