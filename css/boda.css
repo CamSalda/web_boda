@@ -158,12 +158,20 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 /* --- section headings ---------------------------------------------------- */
 /* the template's "Amsterdam" script is near-illegible at heading sizes; reuse
    Work Sans (already loaded) uppercase and letterspaced instead */
+/* Cormorant Garamond: an elegant old-style serif that still reads cleanly at
+   heading sizes, and pairs with the Sacramento script used for the names */
 .fh5co-heading h2 {
-	font-family: "Work Sans", Arial, sans-serif;
-	font-size: clamp(24px, 3.2vw, 32px);
-	font-weight: 300; letter-spacing: 5px; text-transform: uppercase;
-	color: #4A372A; line-height: 1.35; margin-bottom: 14px;
+	font-family: "Cormorant Garamond", Georgia, serif;
+	font-size: clamp(34px, 4.6vw, 48px);
+	font-weight: 400; letter-spacing: 2px; text-transform: uppercase;
+	color: #4A372A; line-height: 1.25; margin-bottom: 14px;
 }
+.faq-list h3, .venue-name {
+	font-family: "Cormorant Garamond", Georgia, serif;
+	font-weight: 500; letter-spacing: .3px;
+}
+.faq-list h3 { font-size: 25px; }
+.venue-name { font-size: 24px; }
 .fh5co-heading { margin-bottom: 3em; }
 .fh5co-heading p { color: #6B5B4C; }
 /* template shrinks any <span> in a heading to a 13px uppercase kicker — that rule
