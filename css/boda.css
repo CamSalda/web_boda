@@ -27,19 +27,28 @@ a:hover, a:focus { color: #7A5C3E; }
 
 /* --- hero ---------------------------------------------------------------- */
 .script { font-family: Sacramento, cursive; }
-#fh5co-header h1.script {
-	font-size: 96px; line-height: 1.05; color: #4A372A; margin: 10px 0 0;
-	text-shadow: 0 1px 12px rgba(253, 249, 240, .9);
-}
-#fh5co-header h1.script small { font-size: .45em; color: #4A372A; display: block; }
-#fh5co-header .pre-title { font-size: 17px; color: #4A372A; max-width: 460px; margin: 0 auto; }
-#fh5co-header .date { font-size: 26px; margin: 18px 0 4px; }
-#fh5co-header .place { font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #4A372A; }
 
-@media screen and (max-width: 768px) {
-	#fh5co-header h1.script { font-size: 60px; }
-	#fh5co-header .date { font-size: 20px; }
-	#fh5co-header .pre-title { font-size: 15px; }
+/* Sacramento has tall ascenders and long descenders: it needs real line-height and
+   explicit margins, or "Camilo" collides with the line above and with "Eli" below.
+   clamp() scales it by viewport instead of stacking breakpoints. */
+#fh5co-header .display-tc h1.script {
+	font-size: clamp(54px, 10vw, 96px); line-height: 1.18; color: #4A372A;
+	margin: 26px 0 0; text-shadow: 0 1px 12px rgba(253, 249, 240, .9);
+}
+#fh5co-header .display-tc h1.script small {
+	font-size: .40em; line-height: 1; color: #4A372A; display: block; margin: 2px 0;
+}
+#fh5co-header .pre-title {
+	font-size: clamp(15px, 1.7vw, 17px); color: #4A372A;
+	max-width: 460px; margin: 0 auto 6px;
+}
+/* template sets `.display-tc h2 { color: white }` — same specificity, so match it */
+#fh5co-header .display-tc h2.date {
+	font-size: clamp(19px, 2.6vw, 26px); color: #4A372A; margin: 24px 0 6px;
+}
+#fh5co-header .place {
+	font-size: clamp(13px, 1.6vw, 16px); letter-spacing: 2px;
+	text-transform: uppercase; color: #4A372A;
 }
 
 /* --- countdown ----------------------------------------------------------- */
@@ -131,3 +140,11 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 .lb-prev { left: 4px; }
 .lb-next { right: 4px; }
 @media screen and (max-width: 560px) { .lb-nav { font-size: 40px; } }
+
+/* hero: the template fixes the cover at 1000px/900px, which clips our taller
+   content (pre-title + names + date + countdown + button) on short screens */
+@media screen and (max-width: 992px) {
+	#fh5co-header.fh5co-cover { height: auto; min-height: 100vh; }
+	#fh5co-header .display-t, #fh5co-header .display-tc { height: auto; }
+	#fh5co-header .display-tc { padding-top: 110px; padding-bottom: 60px; }
+}
