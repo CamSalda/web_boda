@@ -38,8 +38,11 @@ a:hover, a:focus { color: #7A5C3E; }
 	margin: 48px 0 44px; padding-bottom: .24em;
 	text-shadow: 0 1px 12px rgba(253, 249, 240, .9);
 }
+/* the "y" between the names: its own descender was crossing the tall swash of "Eli",
+   so it gets margins in its own em units and they scale with the clamped h1 */
 #fh5co-header .display-tc h1.script small {
-	font-size: .40em; line-height: 1; color: #4A372A; display: block; margin: 2px 0;
+	font-size: .40em; line-height: 1.2; color: #4A372A; display: block;
+	margin: .35em 0 .6em;
 }
 #fh5co-header .pre-title {
 	font-size: clamp(15px, 1.7vw, 17px); color: #4A372A;
