@@ -180,3 +180,13 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 .fh5co-heading span {
 	font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
 }
+
+/* --- language toggle pinned to the corner -------------------------------- */
+/* .fh5co-nav is already position:absolute, so it anchors this */
+.menu-1 ul { padding-right: 100px; }
+.lang-switch { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); }
+@media screen and (max-width: 768px) {
+	/* narrow screens: let it sit in the flow rather than overlap the last link */
+	.menu-1 ul { padding-right: 0; }
+	.lang-switch { position: static; transform: none; }
+}
