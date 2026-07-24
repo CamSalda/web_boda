@@ -205,3 +205,32 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 .fh5co-nav-toggle.fh5co-nav-white > i::after {
 	background: #4A372A !important; color: #4A372A !important;
 }
+
+/* --- guestbook ----------------------------------------------------------- */
+.guestbook-form { max-width: 500px; margin: 0 auto 40px; }
+.guestbook-form .form-group { margin-bottom: 16px; }
+.guestbook-form input, .guestbook-form textarea {
+	width: 100%; padding: 10px 12px; border: 1px solid rgba(74, 55, 42, .2);
+	border-radius: 3px; font-family: inherit; font-size: 14px; color: #4A372A;
+	background: #FDF9F0;
+}
+.guestbook-form textarea { resize: vertical; }
+.guestbook-form input:focus, .guestbook-form textarea:focus {
+	outline: none; border-color: #3F6B4A; box-shadow: 0 0 0 2px rgba(63, 107, 74, .1);
+}
+.privacy-note {
+	background: rgba(63, 107, 74, .08); border-left: 3px solid #3F6B4A;
+	padding: 10px 14px; margin-bottom: 16px; font-size: 13px; color: #4A372A;
+	border-radius: 2px;
+}
+
+.guestbook-display { margin-top: 50px; }
+.guestbook-display .wish {
+	background: #FDF9F0; border: 1px solid rgba(74, 55, 42, .1);
+	padding: 16px; margin-bottom: 14px; border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(74, 55, 42, .06);
+}
+.guestbook-display .wish-name {
+	font-weight: 600; color: #4A372A; font-size: 14px; margin-bottom: 6px;
+}
+.guestbook-display .wish-text { color: #6B5B4C; line-height: 1.5; font-size: 15px; }

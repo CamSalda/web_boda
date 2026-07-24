@@ -56,6 +56,7 @@
 		setInterval(tick, 1000);
 		lightbox();
 		confetti();
+		guestbook();
 	});
 
 	// ponytail: native <dialog> instead of a lightbox plugin — Esc and focus trapping come free.
@@ -85,6 +86,51 @@
 			if (e.key === 'ArrowRight') show(at + 1);
 			if (e.key === 'ArrowLeft') show(at - 1);
 		});
+	}
+
+	// ponytail: guestbook with localStorage persistence. No backend, all wishes shown immediately.
+	function guestbook() {
+		var form = document.getElementById('guestbook-form');
+		var display = document.getElementById('guestbook-display');
+		if (!form || !display) return;
+
+		var storageKey = 'wedding_wishes';
+		var wishes = [];
+		try { wishes = JSON.parse(localStorage.getItem(storageKey)) || []; } catch (e) {}
+
+		function renderWishes() {
+			display.innerHTML = '';
+			if (wishes.length === 0) {
+				display.innerHTML = '<p style="text-align:center;color:#9A8975;font-size:14px;margin-top:20px;"><span class="es">Sé el primero en dejar un deseo</span><span class="en">Be the first to leave a wish</span></p>';
+				return;
+			}
+			wishes.forEach(function (w) {
+				var div = document.createElement('div');
+				div.className = 'wish animate-box';
+				div.innerHTML = '<div class="wish-name">' + escapeHtml(w.name) + '</div><div class="wish-text">' + escapeHtml(w.message).replace(/\n/g, '<br>') + '</div>';
+				display.appendChild(div);
+			});
+		}
+
+		function escapeHtml(text) {
+			var map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+			return text.replace(/[&<>"']/g, function (c) { return map[c]; });
+		}
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			var name = form.name.value.trim();
+			var message = form.message.value.trim();
+			if (!name || !message) return;
+
+			wishes.unshift({ name: name, message: message, date: new Date().toISOString() });
+			try { localStorage.setItem(storageKey, JSON.stringify(wishes)); } catch (e) {}
+
+			form.reset();
+			renderWishes();
+		});
+
+		renderWishes();
 	}
 
 	// ponytail: floating confetti on page load. Canvas-based, no plugin. Cleans up after 5s.
