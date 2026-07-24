@@ -89,15 +89,20 @@
 
 	// ponytail: floating confetti on page load. Canvas-based, no plugin. Cleans up after 5s.
 	function confetti() {
+		console.log('confetti() called');
 		try {
 			var canvas = document.createElement('canvas');
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
-			canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:999999;';
+			canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:999999;background:transparent;';
 			document.body.appendChild(canvas);
+			console.log('canvas created and appended, size:', canvas.width, 'x', canvas.height);
 
 			var ctx = canvas.getContext('2d');
-			if (!ctx) return;
+			if (!ctx) {
+				console.log('no 2d context');
+				return;
+			}
 
 			var pieces = [];
 			var colors = ['#4A372A', '#3F6B4A', '#7A5C3E', '#9A8975', '#FDF9F0'];
@@ -117,6 +122,7 @@
 					color: colors[Math.floor(Math.random() * colors.length)]
 				});
 			}
+			console.log('created', pieces.length, 'confetti pieces');
 
 			function draw() {
 				var now = new Date().getTime();
@@ -145,12 +151,13 @@
 					requestAnimationFrame(draw);
 				} else {
 					canvas.parentNode.removeChild(canvas);
+					console.log('confetti animation complete');
 				}
 			}
 
 			draw();
 		} catch (e) {
-			console.log('confetti failed:', e);
+			console.log('confetti failed:', e.message, e);
 		}
 	}
 })();
