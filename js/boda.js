@@ -55,6 +55,7 @@
 		tick();
 		setInterval(tick, 1000);
 		lightbox();
+		confetti();
 	});
 
 	// ponytail: native <dialog> instead of a lightbox plugin — Esc and focus trapping come free.
@@ -84,5 +85,72 @@
 			if (e.key === 'ArrowRight') show(at + 1);
 			if (e.key === 'ArrowLeft') show(at - 1);
 		});
+	}
+
+	// ponytail: floating confetti on page load. Canvas-based, no plugin. Cleans up after 5s.
+	function confetti() {
+		try {
+			var canvas = document.createElement('canvas');
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:999999;';
+			document.body.appendChild(canvas);
+
+			var ctx = canvas.getContext('2d');
+			if (!ctx) return;
+
+			var pieces = [];
+			var colors = ['#4A372A', '#3F6B4A', '#7A5C3E', '#9A8975', '#FDF9F0'];
+			var duration = 5000;
+			var startTime = new Date().getTime();
+
+			for (var i = 0; i < 80; i++) {
+				pieces.push({
+					x: Math.random() * canvas.width,
+					y: -10,
+					w: Math.random() * 8 + 4,
+					h: Math.random() * 8 + 4,
+					vx: (Math.random() - 0.5) * 2,
+					vy: Math.random() * 2 + 1.5,
+					rotation: Math.random() * 6.28,
+					rotationSpeed: (Math.random() - 0.5) * 0.08,
+					color: colors[Math.floor(Math.random() * colors.length)]
+				});
+			}
+
+			function draw() {
+				var now = new Date().getTime();
+				var elapsed = now - startTime;
+				var progress = Math.min(1, elapsed / duration);
+
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				for (var i = 0; i < pieces.length; i++) {
+					var p = pieces[i];
+					p.y += p.vy;
+					p.x += p.vx;
+					p.rotation += p.rotationSpeed;
+
+					var opacity = 1 - progress;
+					ctx.save();
+					ctx.globalAlpha = opacity;
+					ctx.translate(p.x, p.y);
+					ctx.rotate(p.rotation);
+					ctx.fillStyle = p.color;
+					ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+					ctx.restore();
+				}
+
+				if (elapsed < duration) {
+					requestAnimationFrame(draw);
+				} else {
+					canvas.parentNode.removeChild(canvas);
+				}
+			}
+
+			draw();
+		} catch (e) {
+			console.log('confetti failed:', e);
+		}
 	}
 })();
