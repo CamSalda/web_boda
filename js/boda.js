@@ -56,7 +56,32 @@
 		setInterval(tick, 1000);
 		lightbox();
 		confetti();
+		copyButtons();
 	});
+
+	// click-to-copy for the bank account numbers / PayPal email
+	function copyButtons() {
+		document.addEventListener('click', function (e) {
+			var btn = e.target.closest ? e.target.closest('button.copy') : null;
+			if (!btn) return;
+			var text = btn.getAttribute('data-copy');
+			var done = function () {
+				var prev = document.querySelectorAll('button.copy.copied');
+				for (var i = 0; i < prev.length; i++) prev[i].classList.remove('copied');
+				btn.classList.add('copied');
+			};
+			function fallback() {
+				var ta = document.createElement('textarea');
+				ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+				document.body.appendChild(ta); ta.select();
+				try { document.execCommand('copy'); done(); } catch (err) {}
+				document.body.removeChild(ta);
+			}
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				navigator.clipboard.writeText(text).then(done, fallback);
+			} else { fallback(); }
+		});
+	}
 
 	// ponytail: native <dialog> instead of a lightbox plugin — Esc and focus trapping come free.
 	function lightbox() {
