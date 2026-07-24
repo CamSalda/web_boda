@@ -71,7 +71,7 @@ a:hover, a:focus { color: #7A5C3E; }
 }
 
 /* --- sections ------------------------------------------------------------ */
-#detalles, #lugar, #rsvp, #faq { padding: 70px 0; }
+#detalles, #lugar, #rsvp, #faq, #internacionales, #regalos { padding: 70px 0; }
 .event-wrap { text-align: center; padding: 0; background: none; }
 .event-wrap .event-col { display: inline-block; vertical-align: top; width: 30%; min-width: 220px; padding: 16px; }
 .event-wrap .event-col i { display: block; font-size: 28px; color: #3F6B4A; margin-bottom: 10px; }
