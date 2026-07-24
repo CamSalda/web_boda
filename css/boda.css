@@ -194,9 +194,8 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
    so neither the hamburger (moved to the left) nor the ES|EN pill spills out */
 @media screen and (max-width: 768px) {
 	.fh5co-nav { height: 66px; padding: 0 !important; background: rgba(253, 249, 240, .95); }
-	.fh5co-nav-toggle {
-		right: auto !important; left: 12px;
-		top: 50% !important; margin-top: -22px; /* 44px tall, so half up */
-	}
+	/* the toggle is prepended to #page, not the nav, so it positions against the
+	   page — use a fixed offset (44px tall, centered in the 66px bar) */
+	.fh5co-nav-toggle { right: auto !important; left: 12px; top: 11px !important; }
 	.lang-switch { top: 19px; right: 12px; } /* ~28px pill centered in a 66px bar */
 }
