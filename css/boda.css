@@ -76,6 +76,7 @@ a:hover, a:focus { color: #7A5C3E; }
 .event-wrap .event-col { display: inline-block; vertical-align: top; width: 30%; min-width: 220px; padding: 16px; }
 .event-wrap .event-col i { display: block; font-size: 28px; color: #3F6B4A; margin-bottom: 10px; }
 .event-wrap .dress { margin-top: 20px; font-size: 17px; }
+.event-wrap .dress i { display: block; font-size: 28px; color: #3F6B4A; margin-bottom: 10px; }
 .venue-name { font-size: 19px; color: #4A372A; font-weight: 600; }
 
 .invitacion {
