@@ -197,5 +197,11 @@ footer .script { font-size: 34px; color: #FDF9F0; margin: 0; }
 	/* the toggle is prepended to #page, not the nav, so it positions against the
 	   page — use a fixed offset (44px tall, centered in the 66px bar) */
 	.fh5co-nav-toggle { right: auto !important; left: 12px; top: 11px !important; }
+}
+/* hamburger lines were white — invisible on the cream bar; make them brown */
+.fh5co-nav-toggle.fh5co-nav-white > i,
+.fh5co-nav-toggle.fh5co-nav-white > i::before,
+.fh5co-nav-toggle.fh5co-nav-white > i::after {
+	background: #4A372A !important; color: #4A372A !important;
 	.lang-switch { top: 19px; right: 12px; } /* ~28px pill centered in a 66px bar */
 }
