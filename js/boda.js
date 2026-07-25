@@ -1,5 +1,5 @@
-// ponytail: no i18n library. Both languages sit in the DOM as .es / .en spans and
-// CSS hides the inactive one (see css/boda.css). Revisit only if a 3rd language appears.
+// ponytail: no i18n library. Each language sits in the DOM as .es / .en / .fr spans
+// and CSS hides the inactive ones (see css/boda.css).
 (function () {
 	'use strict';
 
@@ -7,26 +7,34 @@
 		document.documentElement.lang = lang;
 		try { localStorage.setItem('lang', lang); } catch (e) { /* private mode */ }
 
-		// RSVP buttons point at a different Google Form per language
+		// RSVP buttons point at a Google Form per language (FR reuses the EN form)
 		var links = document.querySelectorAll('.rsvp-link');
 		for (var i = 0; i < links.length; i++) {
-			links[i].href = links[i].getAttribute('data-form-' + lang);
+			var href = links[i].getAttribute('data-form-' + lang);
+			if (href) links[i].href = href;
 		}
 		var sw = document.querySelectorAll('.lang-switch a');
 		for (var j = 0; j < sw.length; j++) {
 			sw[j].className = sw[j].getAttribute('data-lang') === lang ? 'active' : '';
 		}
-		// alt text can't hold two languages the way visible spans can
+		// alt text can't hold several languages the way visible spans can;
+		// only overwrite when a translation for this language exists
 		var imgs = document.querySelectorAll('img[data-alt-es]');
 		for (var k = 0; k < imgs.length; k++) {
-			imgs[k].alt = imgs[k].getAttribute('data-alt-' + lang);
+			var alt = imgs[k].getAttribute('data-alt-' + lang);
+			if (alt) imgs[k].alt = alt;
 		}
+	}
+
+	function detect() {
+		var l = (navigator.language || 'es').slice(0, 2);
+		return l === 'en' ? 'en' : l === 'fr' ? 'fr' : 'es';
 	}
 
 	var stored = null;
 	try { stored = localStorage.getItem('lang'); } catch (e) {}
 	// runs in <head>, before first paint, so the wrong language never flashes
-	setLang(stored || ((navigator.language || 'es').slice(0, 2) === 'en' ? 'en' : 'es'));
+	setLang(stored || detect());
 
 	// The wedding: 26 Dec 2026, 16:00. Costa Rica is UTC-6 year round — no DST, no tz library.
 	var target = new Date('2026-12-26T16:00:00-06:00');

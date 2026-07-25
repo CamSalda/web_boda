@@ -10,8 +10,8 @@ from datetime import datetime, timezone, timedelta
 
 html = open("index.html", encoding="utf-8").read()
 
-es, en = html.count('class="es"'), html.count('class="en"')
-assert es == en, f"language spans unbalanced: {es} .es vs {en} .en"
+es, en, fr = html.count('class="es"'), html.count('class="en"'), html.count('class="fr"')
+assert es == en == fr, f"language spans unbalanced: {es} .es / {en} .en / {fr} .fr"
 assert es > 20, f"suspiciously few translated strings: {es}"
 
 missing = [p for p in re.findall(r'(?:src|href)="([^"#:]+)"', html) if not os.path.exists(p)]

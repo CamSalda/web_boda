@@ -1,8 +1,9 @@
 /* Camilo & Eli — overrides on top of the vendored template. Loaded last. */
 
 /* --- bilingual: show one language, hide the other ------------------------ */
-html[lang="es"] .en,
-html[lang="en"] .es { display: none !important; }
+html[lang="es"] .en, html[lang="es"] .fr,
+html[lang="en"] .es, html[lang="en"] .fr,
+html[lang="fr"] .es, html[lang="fr"] .en { display: none !important; }
 
 .lang-switch a { font-weight: 600; letter-spacing: 1px; color: #9A8975; text-decoration: none; }
 .lang-switch a.active { color: #4A372A; }
@@ -85,7 +86,8 @@ a:hover, a:focus { color: #7A5C3E; }
 }
 /* the .es/.en rule above uses display:none; restore block for these images */
 html[lang="es"] .invitacion.es,
-html[lang="en"] .invitacion.en { display: block !important; margin-left: auto; margin-right: auto; }
+html[lang="en"] .invitacion.en,
+html[lang="fr"] .invitacion.fr { display: block !important; margin-left: auto; margin-right: auto; }
 
 .faq-list h3 { font-size: 19px; margin: 30px 0 6px; }
 .faq-list p { margin-bottom: 0; }
