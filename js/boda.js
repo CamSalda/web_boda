@@ -7,7 +7,7 @@
 		document.documentElement.lang = lang;
 		try { localStorage.setItem('lang', lang); } catch (e) { /* private mode */ }
 
-		// RSVP buttons point at a Google Form per language (FR reuses the EN form)
+		// RSVP buttons point at a Google Form per language (all three use the ES form)
 		var links = document.querySelectorAll('.rsvp-link');
 		for (var i = 0; i < links.length; i++) {
 			var href = links[i].getAttribute('data-form-' + lang);
