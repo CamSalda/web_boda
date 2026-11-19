@@ -26,6 +26,7 @@ a.map-link { color: #1a73e8; text-decoration: underline; }
 	padding: 12px 28px; letter-spacing: 1px; border-radius: 2px;
 }
 .btn.btn-default:hover, .btn.btn-default:focus { background: #3F6B4A; border-color: #3F6B4A; color: #fff; }
+.btn { white-space: normal; max-width: 100%; } /* long button labels wrap on phones instead of overflowing */
 
 /* --- hero ---------------------------------------------------------------- */
 .script { font-family: Sacramento, cursive; }
