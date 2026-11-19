@@ -14,6 +14,7 @@ body { background: #FDF9F0; color: #6B5B4C; }
 h1, h2, h3, h4, h5, h6 { color: #4A372A; }
 a { color: #3F6B4A; }
 a:hover, a:focus { color: #7A5C3E; }
+a.map-link { color: #1a73e8; text-decoration: underline; }
 
 .fh5co-section-gray { background: #F4EEE1; }
 .fh5co-nav { background: rgba(253, 249, 240, .95); }
