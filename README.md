@@ -15,7 +15,7 @@ No hay build, no hay npm, no hay que instalar nada. Se edita el HTML y se hace p
 | Colores, tipografías, espaciados | `css/boda.css` |
 | Fecha del contador, idioma por defecto | `js/boda.js` |
 | Enlaces de los formularios de RSVP | atributos `data-form-es` / `data-form-en` en `index.html` |
-| Mapa del lugar | el `<iframe>` dentro de `#lugar` en `index.html` |
+| Punto de encuentro (Google Maps) | el botón dentro de `#logistica` en `index.html` |
 | Invitación, fondo, imagen de preview | `images/invitacion-es.jpg`, `invitacion-en.jpg`, `monstera-bg.png`, `og.jpg` |
 
 ### Los dos idiomas
